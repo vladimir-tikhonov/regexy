@@ -48,8 +48,16 @@ Generates regular expressions for email addresses validation. Available options:
 
 ```ruby
 r1 = Regexy::Web::Email.new(:relaxed)
-r2 = Regexy::Web::Email.new(:normal)  # does not allow 'f@s.c' and 'invalid-ip@127.0.0.1.26'
-r2 = Regexy::Web::Email.new(:strict)  # does not allow 'hans,peter@example.com' and "partially.\"quoted\"@sld.com"
+r2 = Regexy::Web::Email.new(:normal)  # does not match 'f@s.c' and 'invalid-ip@127.0.0.1.26'
+r2 = Regexy::Web::Email.new(:strict)  # does not match 'hans,peter@example.com' and "partially.\"quoted\"@sld.com"
+```
+### Regexy::Web::IPv4
+
+Generates regular expressions for matching IPv4 addresses. Available options: `:normal` (by default) for matching ip without port and `:with_port` for guess what.
+
+```ruby
+r1 = Regexy::Web::IPv4.new             # matches '127.0.0.1' but not '127.0.0.1:80'
+r1 = Regexy::Web::IPv4.new(:with_port) # matches '127.0.0.1:80' but not '127.0.0.1'
 ```
 
 ## Contributing
