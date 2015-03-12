@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 describe Regexy::Web::Email do
+  it_should_behave_like 'class_that_check_mode'
+
   VALID_EMAILS = [
     'a+b@plus-in-local.com',
     'a_b@underscore-in-local.com',
@@ -65,10 +67,6 @@ describe Regexy::Web::Email do
     "&'*+-./=?^_{}~@other-valid-characters-in-local.net",
     'mixed-1234-in-{+^}-local@sld.net'
   ]
-
-  it 'fails when wrong mode is provided' do
-    expect { Regexy::Web::Email.new(:invalid) }.to raise_error(ArgumentError)
-  end
 
   context 'relaxed mode' do
     let(:r) { Regexy::Web::Email.new(:relaxed) }
