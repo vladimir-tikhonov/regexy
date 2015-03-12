@@ -1,5 +1,5 @@
 require 'regexy/version'
 
 module Regexy
-  # Your code goes here...
+  autoload :Regexp, 'regexy/regexp'
 end
