@@ -61,7 +61,7 @@ r1 = Regexy::Web::IPv4.new(:with_port) # matches '127.0.0.1:80' but not '127.0.0
 ```
 ### Regexy::Web::IPv6
 
-Generates regular expressions for matching IPv6 addresses (standard, mixed, and compressed notation and supported). Works in `:normal` (by default) and `:with_port` modes
+Generates regular expressions for matching IPv6 addresses (standard, mixed, and compressed notation are supported). Works in `:normal` (by default) and `:with_port` modes
 
 ```ruby
 r1 = Regexy::Web::IPv6.new             # matches '::1', '2001:DB8::8:800:200C:417A' and '::FFFF:129.144.52.38'
