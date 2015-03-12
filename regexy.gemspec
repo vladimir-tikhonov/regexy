@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rugex/version'
+require 'regexy/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'rugex'
-  spec.version       = Rugex::VERSION
+  spec.name          = 'regexy'
+  spec.version       = Regexy::VERSION
   spec.authors       = ['Vladimir Tikhonov']
   spec.email         = ['vladimir@tikhonov.by']
 
-  spec.summary       = 'Rugex is the collection of useful ruby regular expressions'
-  spec.description   = 'Rugex contains a lot of common-use regular expressions and provides a friendly syntax to combine them.'
-  spec.homepage      = 'https://github.com/vladimir-tikhonov/rugex'
+  spec.summary       = 'Regexy is the collection of useful ruby regular expressions'
+  spec.description   = 'Regexy contains a lot of common-use regular expressions and provides a friendly syntax to combine them.'
+  spec.homepage      = 'https://github.com/vladimir-tikhonov/regexy'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.require_paths = ['lib']
