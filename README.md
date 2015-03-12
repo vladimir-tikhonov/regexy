@@ -7,6 +7,11 @@
 
 Regexy is the ruby gem that contains a lot of common-use regular expressions and provides a friendly syntax to combine them.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -25,8 +30,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Regexy::Regexp
 
+Wrapper around original [Regexp](http://ruby-doc.org/core-2.2.1/Regexp.html) class. You can safely use it instead of original one.
+
+```ruby
+r1 = Regexy::Regexp.new('foo') # could be initialized from string
+r2 = Regexy::Regexp.new(/foo/) # from regexp
+r3 = Regexy::Regexp.new(r2)    # or even from another Regexy::Regexp
+r4 = Regexy::Regexp.new('foo', Regexp::IGNORECASE) # pass additional configuration
+'abcfoocde' =~ r1    # => 3
+r2.match 'abcfoocde' # => #<MatchData "foo">
+```
+### Regexy::Web::Email
+
+Generates regular expressions for email addresses validation. Available options: `:relaxed` for general sanity check, `:normal` (which is default) with some additional length and ip addresses validations and `:strict` for the paranoids.
+
+```ruby
+r1 = Regexy::Web::Email.new(:relaxed)
+r2 = Regexy::Web::Email.new(:normal)  # does not allow 'f@s.c' and 'invalid-ip@127.0.0.1.26'
+r2 = Regexy::Web::Email.new(:strict)  # does not allow 'hans,peter@example.com' and "partially.\"quoted\"@sld.com"
+```
 
 ## Contributing
 
