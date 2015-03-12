@@ -1,0 +1,11 @@
+language: ruby
+cache: bundler
+
+rvm:
+  - 2.0.0-p643
+  - 2.1.4
+  - 2.2.1
+  - rbx-2
+  - jruby
+
+script: 'bundle exec rspec'
