@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 describe Regexy::Web::Email do
   VALID_EMAILS = [
     'a+b@plus-in-local.com',
