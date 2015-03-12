@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Regexy
   module Web
     class Email < ::Regexy::Regexp
