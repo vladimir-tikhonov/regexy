@@ -25,10 +25,34 @@ describe Regexy::Regexp do
     expect(r).to eq /\s/i
   end
 
+  it 'saves original options unless custom options provided' do
+    r = Regexy::Regexp.new(/\s/i)
+    expect(r).to eq /\s/i
+  end
+
   it 'mimics original regexp behaviour' do
     #Fix for rubinius
     expected_methods = ::Regexp.public_instance_methods(false) - [:initialize, :initialize_copy]
     expect(Regexy::Regexp.public_instance_methods(false)).to include(*expected_methods)
+  end
+
+  it 'allows to combine regexes' do
+    r1 = Regexy::Regexp.new(/foo/)
+    r2 = Regexy::Regexp.new(/bar/)
+    expect(r1 | r2).to eq /foo|bar/
+  end
+
+  it 'saves options if presented' do
+    r1 = Regexy::Regexp.new(/foo/i)
+    r2 = Regexy::Regexp.new(/bar/)
+    expect(r1 | r2).to eq /foo|bar/i
+    expect(r2 | r1).to eq /bar|foo/i
+  end
+
+  it 'merges option of two regexes' do
+    r1 = Regexy::Regexp.new(/foo/i)
+    r2 = Regexy::Regexp.new(/bar/x)
+    expect(r1 | r2).to eq /foo|bar/ix
   end
 end
 

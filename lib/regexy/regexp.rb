@@ -12,6 +12,15 @@ module Regexy
       @internal_regexp = ::Regexp.new(regexp, *args)
     end
 
+    def | other
+      other = ::Regexy::Regexp.new(other)
+      new_regexp = "#{source}|#{other.source}"
+      new_options = options | other.options
+      ::Regexy::Regexp.new(new_regexp, new_options)
+    end
+
+    alias_method :or, :|
+
     protected
 
     def normalize_regexp(regexp, *args)

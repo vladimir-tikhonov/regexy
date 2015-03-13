@@ -5,12 +5,13 @@
 [![Code Climate](https://codeclimate.com/github/vladimir-tikhonov/regexy/badges/gpa.svg)](https://codeclimate.com/github/vladimir-tikhonov/regexy)
 [![Coverage Status](https://coveralls.io/repos/vladimir-tikhonov/regexy/badge.svg)](https://coveralls.io/r/vladimir-tikhonov/regexy)
 
-Regexy is the ruby gem that contains a lot of common-use regular expressions and provides a friendly syntax to combine them.
+Regexy is the ruby gem that contains a lot of common-use regular expressions (such as email or ip addresses validations) and provides a friendly syntax to combine them.
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Contributing](#contributing)
 
 ## Installation
 
@@ -42,6 +43,15 @@ r4 = Regexy::Regexp.new('foo', Regexp::IGNORECASE) # pass additional configurati
 'abcfoocde' =~ r1    # => 3
 r2.match 'abcfoocde' # => #<MatchData "foo">
 ```
+### Combining regular expressions
+
+You can combine your regular expressions with `|` operator using `|` method (or `or`, which is alias for it). Note, that regexp options will be combined too.
+```ruby
+Regexy::Regexp.new('foo') | Regexy::Regexp.new(/bar/) # => /foo|bar/
+Regexy::Regexp.new(/foo/i) | /bar/x # => /foo|bar/ix
+Regexy::Regexp.new(/foo/i).or 'bar' # => /foo|bar/i
+```
+
 ### Regexy::Web::Email
 
 Generates regular expressions for email addresses validation (with unicode support). Available options: `:relaxed` for general sanity check, `:normal` (which is default) with some additional length and ip addresses validations and `:strict` for the paranoids.
@@ -61,7 +71,7 @@ r1 = Regexy::Web::IPv4.new(:with_port) # matches '127.0.0.1:80' but not '127.0.0
 ```
 ### Regexy::Web::IPv6
 
-Generates regular expressions for matching IPv6 addresses (standard, mixed, and compressed notation are supported). Works in `:normal` (by default) and `:with_port` modes
+Generates regular expressions for matching IPv6 addresses (standard, mixed, and compressed notation are supported). Works in `:normal` (by default) and `:with_port` modes.
 
 ```ruby
 r1 = Regexy::Web::IPv6.new             # matches '::1', '2001:DB8::8:800:200C:417A' and '::FFFF:129.144.52.38'
@@ -69,9 +79,4 @@ r1 = Regexy::Web::IPv6.new(:with_port) # matches '[::1]:80' and so on
 ```
 
 ## Contributing
-
-1. Fork it ( https://github.com/vladimir-tikhonov/regexy/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Have an idea of new regular expression? Create an [issue](https://github.com/vladimir-tikhonov/regexy/issues) (some test cases will be much appreciated) or open a [pull request](https://github.com/vladimir-tikhonov/regexy/pulls).
