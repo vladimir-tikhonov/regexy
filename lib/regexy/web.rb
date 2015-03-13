@@ -3,5 +3,6 @@ module Regexy
     autoload :Email, 'regexy/web/email'
     autoload :IPv4,  'regexy/web/ip'
     autoload :IPv6,  'regexy/web/ip'
+    autoload :Url,   'regexy/web/url'
   end
 end

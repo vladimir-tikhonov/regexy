@@ -91,6 +91,13 @@ r1 = Regexy::Web::IPv6.new             # matches '::1', '2001:DB8::8:800:200C:41
 r1 = Regexy::Web::IPv6.new(:with_port) # matches '[::1]:80' and so on
 any_ipv6 = Regexy::Web::IPv6.new(:normal) | Regexy::Web::IPv6.new(:with_port) # matches ip w\ and w\o port
 ```
+### Regexy::Web::Url
+
+Generates regular expressions for matching Url addresses (with unicode support).
+
+```ruby
+r1 = Regexy::Web::Url.new # matches 'http://foo.com', 'www.foo.com' and 'foo.com'
+```
 
 ## Contributing
 Have an idea of new regular expression? Create an [issue](https://github.com/vladimir-tikhonov/regexy/issues) (some test cases will be much appreciated) or open a [pull request](https://github.com/vladimir-tikhonov/regexy/pulls).
