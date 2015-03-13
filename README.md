@@ -44,7 +44,7 @@ r2.match 'abcfoocde' # => #<MatchData "foo">
 ```
 ### Regexy::Web::Email
 
-Generates regular expressions for email addresses validation. Available options: `:relaxed` for general sanity check, `:normal` (which is default) with some additional length and ip addresses validations and `:strict` for the paranoids.
+Generates regular expressions for email addresses validation (with unicode support). Available options: `:relaxed` for general sanity check, `:normal` (which is default) with some additional length and ip addresses validations and `:strict` for the paranoids.
 
 ```ruby
 r1 = Regexy::Web::Email.new(:relaxed)

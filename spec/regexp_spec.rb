@@ -67,4 +67,8 @@ describe Regexy::RegexpWithMode do
   it 'allows to pass additional config' do
     expect(ValidRegex.new(:mode_2, Regexp::IGNORECASE)).to eq /mode_2/i
   end
+
+  it 'fails when wrong mode is provided' do
+    expect { ValidRegex.new(:mode_3) }.to raise_error ArgumentError
+  end
 end
