@@ -1,4 +1,6 @@
 describe Regexy::Web::IPv4 do
+  it_should_behave_like 'regexp_with_mode'
+
   VALID_ADDRESSES = [
     '0.0.0.0',
     '255.255.255.255',
@@ -57,6 +59,8 @@ describe Regexy::Web::IPv4 do
 end
 
 describe Regexy::Web::IPv6 do
+  it_should_behave_like 'regexp_with_mode'
+
   VALID_ADDRESSES_6 = [
     '::1',
     '::',

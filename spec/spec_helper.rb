@@ -3,3 +3,5 @@ require 'regexy'
 require 'coveralls'
 
 Coveralls.wear!
+
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }

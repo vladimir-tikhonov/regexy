@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 describe Regexy::Web::Email do
+  it_should_behave_like 'regexp_with_mode'
+
   VALID_EMAILS = [
     'a+b@plus-in-local.com',
     'a_b@underscore-in-local.com',
