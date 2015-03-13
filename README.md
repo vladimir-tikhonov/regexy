@@ -50,6 +50,7 @@ You can combine your regular expressions with `|` operator using `|` method (or 
 Regexy::Regexp.new('foo') | Regexy::Regexp.new(/bar/) # => /foo|bar/
 Regexy::Regexp.new(/foo/i) | /bar/x # => /foo|bar/ix
 Regexy::Regexp.new(/foo/i).or 'bar' # => /foo|bar/i
+any_ipv4 = Regexy::Web::IPv4.new(:normal) | Regexy::Web::IPv4.new(:with_port) # matches ip w\ and w\o port
 ```
 
 ### Regexy::Web::Email
@@ -68,6 +69,7 @@ Generates regular expressions for matching IPv4 addresses. Available options: `:
 ```ruby
 r1 = Regexy::Web::IPv4.new             # matches '127.0.0.1' but not '127.0.0.1:80'
 r1 = Regexy::Web::IPv4.new(:with_port) # matches '127.0.0.1:80' but not '127.0.0.1'
+any_ipv4 = Regexy::Web::IPv4.new(:normal) | Regexy::Web::IPv4.new(:with_port) # matches ip w\ and w\o port
 ```
 ### Regexy::Web::IPv6
 
@@ -76,6 +78,7 @@ Generates regular expressions for matching IPv6 addresses (standard, mixed, and 
 ```ruby
 r1 = Regexy::Web::IPv6.new             # matches '::1', '2001:DB8::8:800:200C:417A' and '::FFFF:129.144.52.38'
 r1 = Regexy::Web::IPv6.new(:with_port) # matches '[::1]:80' and so on
+any_ipv6 = Regexy::Web::IPv6.new(:normal) | Regexy::Web::IPv6.new(:with_port) # matches ip w\ and w\o port
 ```
 
 ## Contributing
