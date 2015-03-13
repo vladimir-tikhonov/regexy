@@ -74,6 +74,15 @@ r1 = Regexy::Web::Email.new(:relaxed)
 r2 = Regexy::Web::Email.new(:normal)  # does not match 'f@s.c' and 'invalid-ip@127.0.0.1.26'
 r2 = Regexy::Web::Email.new(:strict)  # does not match 'hans,peter@example.com' and "partially.\"quoted\"@sld.com"
 ```
+### Regexy::Web::Hashtag
+
+Generates regular expressions for matching Hashtags.
+A hashtag can contain any UTF-8 alphanumeric character, plus the underscore symbol.
+A hashtag can't be only numeric, it must have at least one alpahanumeric character or the underscore symbol.
+
+```ruby
+r1 = Regexy::Web::Hashtag.new # matches '#hash_tags'
+```
 ### Regexy::Web::IPv4
 
 Generates regular expressions for matching IPv4 addresses. Available options: `:normal` (by default) for matching ip without port and `:with_port` for guess what.
