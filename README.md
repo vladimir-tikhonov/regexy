@@ -15,6 +15,7 @@ Regexy is the ruby gem that contains a lot of common-use regular expressions (su
     * [Combining expressions](#combining-regular-expressions)
     * [Email addresses](#regexywebemail)
     * [IP addresses](#regexywebipv4)
+    * [Url](#regexyweburl)
 - [Contributing](#contributing)
 
 ## Installation
