@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Regexy is the collection of useful ruby regular expressions'
   spec.description   = 'Regexy contains a lot of common-use regular expressions and provides a friendly syntax to combine them.'
   spec.homepage      = 'https://github.com/vladimir-tikhonov/regexy'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.require_paths = ['lib']
