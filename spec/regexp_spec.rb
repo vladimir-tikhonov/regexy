@@ -36,23 +36,64 @@ describe Regexy::Regexp do
     expect(Regexy::Regexp.public_instance_methods(false)).to include(*expected_methods)
   end
 
-  it 'allows to combine regexes' do
-    r1 = Regexy::Regexp.new(/foo/)
-    r2 = Regexy::Regexp.new(/bar/)
-    expect(r1 | r2).to eq /foo|bar/
+  context '| method' do
+    it 'allows to combine regexes' do
+      r1 = Regexy::Regexp.new(/foo/)
+      r2 = Regexy::Regexp.new(/bar/)
+      expect(r1 | r2).to eq /foo|bar/
+    end
+
+    it 'saves options if presented' do
+      r1 = Regexy::Regexp.new(/foo/i)
+      r2 = Regexy::Regexp.new(/bar/)
+      expect(r1 | r2).to eq /foo|bar/i
+      expect(r2 | r1).to eq /bar|foo/i
+    end
+
+    it 'merges option of two regexes' do
+      r1 = Regexy::Regexp.new(/foo/i)
+      r2 = Regexy::Regexp.new(/bar/x)
+      expect(r1 | r2).to eq /foo|bar/ix
+    end
   end
 
-  it 'saves options if presented' do
-    r1 = Regexy::Regexp.new(/foo/i)
-    r2 = Regexy::Regexp.new(/bar/)
-    expect(r1 | r2).to eq /foo|bar/i
-    expect(r2 | r1).to eq /bar|foo/i
-  end
+  context '+ method' do
+    it 'allows to combine regexes' do
+      r1 = Regexy::Regexp.new(/foo/)
+      r2 = Regexy::Regexp.new(/bar/)
+      expect(r1 + r2).to eq /foobar/
+    end
 
-  it 'merges option of two regexes' do
-    r1 = Regexy::Regexp.new(/foo/i)
-    r2 = Regexy::Regexp.new(/bar/x)
-    expect(r1 | r2).to eq /foo|bar/ix
+    it 'saves options if presented' do
+      r1 = Regexy::Regexp.new(/foo/i)
+      r2 = Regexy::Regexp.new(/bar/)
+      expect(r1 + r2).to eq /foobar/i
+      expect(r2 + r1).to eq /barfoo/i
+    end
+
+    it 'merges option of two regexes' do
+      r1 = Regexy::Regexp.new(/foo/i)
+      r2 = Regexy::Regexp.new(/bar/x)
+      expect(r1 + r2).to eq /foobar/ix
+    end
+
+    it 'removes leading ^ from second regex' do
+      r1 = Regexy::Regexp.new(/foo/)
+      r2 = Regexy::Regexp.new(/^bar/)
+      expect(r1 + r2).to eq /foobar/
+    end
+
+    it 'removes trailing $ from first regex' do
+      r1 = Regexy::Regexp.new(/foo$/)
+      r2 = Regexy::Regexp.new(/bar/)
+      expect(r1 + r2).to eq /foobar/
+    end
+
+    it 'normalize both expressions' do
+      r1 = Regexy::Regexp.new(/^foo$/)
+      r2 = Regexy::Regexp.new(/^bar$/)
+      expect(r1 + r2).to eq /^foobar$/
+    end
   end
 end
 

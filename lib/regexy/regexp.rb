@@ -21,6 +21,15 @@ module Regexy
 
     alias_method :or, :|
 
+    def + other
+      other = ::Regexy::Regexp.new(other)
+      new_regexp = source.chomp('$') + other.source.sub(/^\^/, '')
+      new_options = options | other.options
+      ::Regexy::Regexp.new(new_regexp, new_options)
+    end
+
+    alias_method :and_then, :+
+
     protected
 
     def normalize_regexp(regexp, *args)
