@@ -61,9 +61,9 @@ any_ipv4 = Regexy::Web::IPv4.new(:normal) | Regexy::Web::IPv4.new(:with_port) # 
 Also you could simply join two expressions using `+` method, or it's alias `and_then`. Note, that it will __remove__ trailing `\z` from first regex and leading `\A` from second regex.
 ```ruby
 Regexy::Regexp.new('foo') + Regexy::Regexp.new(/bar/) # => /foobar/
-Regexy::Regexp.new(/foo\z/i) | /bar/ # => /foobar/i
-Regexy::Regexp.new(/foo/).or '\Abar' # => /foobar/
-Regexy::Regexp.new(/\Afoo\z/).or '\Abar\z' # => /\Afoobar\z/
+Regexy::Regexp.new(/foo\z/i) + /bar/ # => /foobar/i
+Regexy::Regexp.new(/foo/).and_then '\Abar' # => /foobar/
+Regexy::Regexp.new(/\Afoo\z/).and_then '\Abar\z' # => /\Afoobar\z/
 ```
 
 ### Regexy::Web::Email
