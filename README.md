@@ -14,6 +14,7 @@ Regexy is the ruby gem that contains a lot of common-use regular expressions (su
     * [General usage](#regexyregexp)
     * [Combining expressions](#combining-regular-expressions)
     * [Email addresses](#regexywebemail)
+    * [Hashtag](#regexywebhashtag)
     * [IP addresses](#regexywebipv4)
     * [Url](#regexyweburl)
 - [Contributing](#contributing)
@@ -57,12 +58,12 @@ Regexy::Regexp.new(/foo/i) | /bar/x # => /foo|bar/ix
 Regexy::Regexp.new(/foo/i).or 'bar' # => /foo|bar/i
 any_ipv4 = Regexy::Web::IPv4.new(:normal) | Regexy::Web::IPv4.new(:with_port) # matches ip w\ and w\o port
 ```
-Also you could simply join two expressions using `+` method, or it's alias `and_then`. Note, that it will __remove__ trailing `$` from first regex and leading `^` from second regex.
+Also you could simply join two expressions using `+` method, or it's alias `and_then`. Note, that it will __remove__ trailing `\z` from first regex and leading `\A` from second regex.
 ```ruby
 Regexy::Regexp.new('foo') + Regexy::Regexp.new(/bar/) # => /foobar/
-Regexy::Regexp.new(/foo$/i) | /bar/ # => /foobar/i
-Regexy::Regexp.new(/foo/).or '^bar' # => /foobar/
-Regexy::Regexp.new(/^foo$/).or '^bar$' # => /^foobar$/
+Regexy::Regexp.new(/foo\z/i) | /bar/ # => /foobar/i
+Regexy::Regexp.new(/foo/).or '\Abar' # => /foobar/
+Regexy::Regexp.new(/\Afoo\z/).or '\Abar\z' # => /\Afoobar\z/
 ```
 
 ### Regexy::Web::Email

@@ -77,22 +77,28 @@ describe Regexy::Regexp do
       expect(r1 + r2).to eq /foobar/ix
     end
 
-    it 'removes leading ^ from second regex' do
+    it 'removes leading \A from second regex' do
       r1 = Regexy::Regexp.new(/foo/)
-      r2 = Regexy::Regexp.new(/^bar/)
+      r2 = Regexy::Regexp.new(/\Abar/)
       expect(r1 + r2).to eq /foobar/
     end
 
-    it 'removes trailing $ from first regex' do
-      r1 = Regexy::Regexp.new(/foo$/)
+    it 'removes trailing /z from first regex' do
+      r1 = Regexy::Regexp.new(/foo\z/)
       r2 = Regexy::Regexp.new(/bar/)
       expect(r1 + r2).to eq /foobar/
     end
 
     it 'normalize both expressions' do
-      r1 = Regexy::Regexp.new(/^foo$/)
-      r2 = Regexy::Regexp.new(/^bar$/)
-      expect(r1 + r2).to eq /^foobar$/
+      r1 = Regexy::Regexp.new(/\Afoo\z/)
+      r2 = Regexy::Regexp.new(/\Abar\z/)
+      expect(r1 + r2).to eq /\Afoobar\z/
+    end
+
+    it 'leaves \A and \z if no other characters presented' do
+      r1 = Regexy::Regexp.new(/\A/)
+      r2 = Regexy::Regexp.new(/\z/)
+      expect(r1 + r2).to eq /\A\z/
     end
   end
 end

@@ -23,7 +23,9 @@ module Regexy
 
     def + other
       other = ::Regexy::Regexp.new(other)
-      new_regexp = source.chomp('$') + other.source.sub(/^\^/, '')
+      first_regex = source.length > 2 ? source.sub(/\\z\s*\z/, '') : source
+      second_regex = other.source.length > 2 ? other.source.sub(/\A\\A/, '') : other.source
+      new_regexp = first_regex + second_regex
       new_options = options | other.options
       ::Regexy::Regexp.new(new_regexp, new_options)
     end

@@ -3,7 +3,7 @@
 module Regexy
   module Web
     class Hashtag < ::Regexy::Regexp
-      HASHTAG = /^#(?=.{2,140}$)([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)$/u.freeze
+      HASHTAG = /\A#(?=.{2,140}\z)([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)\z/u.freeze
 
       def initialize(*args)
         super(HASHTAG, *args)
