@@ -3,9 +3,9 @@
 module Regexy
   module Web
     class Email < ::Regexy::RegexpWithMode
-      EMAIL_RELAXED = /\A\s*[^@\s]+@([^@\s]+\.)+[^@\s]+\s*\z/i.freeze
-      EMAIL_NORMAL =  /\A\s*([^@\s]{1,64})@((?:[-\p{L}\d]+\.)+\p{L}{2,})\s*\z/i.freeze
-      EMAIL_STRICT =  /\A\s*([-\p{L}\d+._]{1,64})@((?:[-\p{L}\d]+\.)+\p{L}{2,})\s*\z/i.freeze
+      EMAIL_RELAXED = /\A\s*(([^@\s]+)@(([^@\s]+\.)+[^@\s]+))\s*\z/i.freeze
+      EMAIL_NORMAL =  /\A\s*(([^@\s]{1,64})@((?:[-\p{L}\d]+\.)+\p{L}{2,}))\s*\z/i.freeze
+      EMAIL_STRICT =  /\A\s*(([-\p{L}\d+._]{1,64})@((?:[-\p{L}\d]+\.)+\p{L}{2,}))\s*\z/i.freeze
 
       protected
 

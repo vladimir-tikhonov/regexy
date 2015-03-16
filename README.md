@@ -12,7 +12,9 @@ Regexy is the ruby gem that contains a lot of common-use regular expressions (su
 - [Installation](#installation)
 - [Usage](#usage)
     * [General usage](#regexyregexp)
+    * [Getting the original regexp](#getting-the-original-regexp)
     * [Combining expressions](#combining-regular-expressions)
+    * [Bound and unbound methods](#bound-and-unbound-regular-expressions)
     * [Email addresses](#regexywebemail)
     * [Hashtag](#regexywebhashtag)
     * [IP addresses](#regexywebipv4)
@@ -49,6 +51,13 @@ r4 = Regexy::Regexp.new('foo', Regexp::IGNORECASE) # pass additional configurati
 'abcfoocde' =~ r1    # => 3
 r2.match 'abcfoocde' # => #<MatchData "foo">
 ```
+### Getting the original regexp
+For methods, that checks if it's arguments `is_a` Regexp instances (for example `String#scan`) you can use `internal_regexp` method.
+```ruby
+str = 'Email me at first@mail.com or second@mail.com'
+str.scan(Regexy::Web::Email.new.unbound.internal_regexp).map(&:first) # => ["first@mail.com", "second@mail.com"]
+```
+
 ### Combining regular expressions
 
 You can combine your regular expressions with `|` operator using `|` method (or `or`, which is alias for it). Note, that regexp options will be combined too.
@@ -65,7 +74,17 @@ Regexy::Regexp.new(/foo\z/i) + /bar/ # => /foobar/i
 Regexy::Regexp.new(/foo/).and_then '\Abar' # => /foobar/
 Regexy::Regexp.new(/\Afoo\z/).and_then '\Abar\z' # => /\Afoobar\z/
 ```
+### Bound and unbound regular expressions
+All build-in regular expressions provided in a form of `\A...\z`, which means that they match entire string only. You can remove or add string boundaries using `bound` and `unbound` methods.
+Optional arguments `method` available (`:both` by default) - `:left` for manipulating only leading `\A` and `:right` for trailing `\z`.
+```ruby
+Regexy::Regexp.new('/Afoo/z').unbound(:left) # => /foo\z/
+Regexy::Regexp.new(/foo/i).bound # => /\Afoo\z/i
 
+# Example - find all ip addresses in the string
+str = '0.0.0.0 and 255.255.255.255 are both valid ip addresses'
+str.scan(Regexy::Web::IPv4.new.unbound.internal_regexp).flatten # => ["0.0.0.0", "255.255.255.255"]
+```
 ### Regexy::Web::Email
 
 Generates regular expressions for email addresses validation (with unicode support). Available options: `:relaxed` for general sanity check, `:normal` (which is default) with some additional length and ip addresses validations and `:strict` for the paranoids.

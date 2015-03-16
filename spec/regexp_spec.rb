@@ -101,6 +101,42 @@ describe Regexy::Regexp do
       expect(r1 + r2).to eq /\A\z/
     end
   end
+
+  context '#bound' do
+    it 'prepends \A to regexp when method is :left' do
+      expect(Regexy::Regexp.new(/foo/).bound(:left)).to eq /\Afoo/
+    end
+
+    it 'appends \z when method is :right' do
+      expect(Regexy::Regexp.new(/foo/).bound(:right)).to eq /foo\z/
+    end
+
+    it 'prepends \A and appends \z when method is :both' do
+      expect(Regexy::Regexp.new(/foo/).bound(:both)).to eq /\Afoo\z/
+    end
+
+    it 'preserves regexp options' do
+      expect(Regexy::Regexp.new(/foo/i).bound).to eq /\Afoo\z/i
+    end
+  end
+
+  context '#unbound' do
+    it 'removes leading \A when method is :left' do
+      expect(Regexy::Regexp.new(/\Afoo/).unbound(:left)).to eq /foo/
+    end
+
+    it 'removes trailing \z when method is :right' do
+      expect(Regexy::Regexp.new(/foo\z/).unbound(:right)).to eq /foo/
+    end
+
+    it 'removes \A and \z when method is :both' do
+      expect(Regexy::Regexp.new(/\Afoo\z/).unbound(:both)).to eq /foo/
+    end
+
+    it 'preserves regexp options' do
+      expect(Regexy::Regexp.new(/\Afoo\z/i).unbound).to eq /foo/i
+    end
+  end
 end
 
 describe Regexy::RegexpWithMode do

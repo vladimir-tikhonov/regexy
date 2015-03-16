@@ -32,6 +32,30 @@ module Regexy
 
     alias_method :and_then, :+
 
+    def bound(method = :both)
+      new_regexp = source
+      method = method.to_sym
+      if method == :left || method == :both
+        new_regexp.prepend('\A')
+      end
+      if method == :right || method == :both
+        new_regexp.concat('\z')
+      end
+      ::Regexy::Regexp.new(new_regexp, options)
+    end
+
+    def unbound(method = :both)
+      new_regexp = source
+      method = method.to_sym
+      if method == :left || method == :both
+        new_regexp.sub!(/\A\\A/, '')
+      end
+      if method == :right || method == :both
+        new_regexp.sub!(/\\z\s*\z/, '')
+      end
+      ::Regexy::Regexp.new(new_regexp, options)
+    end
+
     protected
 
     def normalize_regexp(regexp, *args)
