@@ -30,7 +30,7 @@ describe Regexy::Web::HostName do
     end
   end
 
-  it 'does not allow valid hostnames' do
+  it 'does not allow invalid hostnames' do
     INVALID_HOSTNAMES.each do |hostname|
       expect(hostname =~ r).to be_nil
     end
