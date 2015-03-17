@@ -32,6 +32,32 @@ module Regexy
 
     alias_method :and_then, :+
 
+    def bound(method = :both)
+      new_regexp = source
+      method = method.to_sym
+      if method == :left || method == :both
+        new_regexp.prepend('\A')
+      end
+      if method == :right || method == :both
+        new_regexp.concat('\z')
+      end
+      new_regexp = additional_bound(method, new_regexp)
+      ::Regexy::Regexp.new(new_regexp, options)
+    end
+
+    def unbound(method = :both)
+      new_regexp = source
+      method = method.to_sym
+      if method == :left || method == :both
+        new_regexp.sub!(/\A\\A/, '')
+      end
+      if method == :right || method == :both
+        new_regexp.sub!(/\\z\s*\z/, '')
+      end
+      new_regexp = additional_unbound(method, new_regexp)
+      ::Regexy::Regexp.new(new_regexp, options)
+    end
+
     protected
 
     def normalize_regexp(regexp, *args)
@@ -40,6 +66,14 @@ module Regexy
       when ::Regexp then args.any? ? regexp.source : regexp # allows to pass custom options to regexp
       else regexp
       end
+    end
+
+    def additional_bound(method, regex) # You can override this methods if your regular expression needs additional bound/unbound logic
+      regex
+    end
+
+    def additional_unbound(method, regex)
+      regex
     end
   end
 
