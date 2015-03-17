@@ -19,6 +19,7 @@ Regexy is the ruby gem that contains a lot of common-use regular expressions (su
     * [Hashtag](#regexywebhashtag)
     * [IP addresses](#regexywebipv4)
     * [Url](#regexyweburl)
+    * [Hostname](#regexywebhostname)
 - [Contributing](#contributing)
 
 ## Installation
@@ -127,6 +128,14 @@ Generates regular expressions for matching Url addresses (with unicode support).
 
 ```ruby
 r1 = Regexy::Web::Url.new # matches 'http://foo.com', 'www.foo.com' and 'foo.com'
+```
+
+### Regexy::Web::HostName
+
+Generates regular expressions for matching hostname (with unicode support).
+
+```ruby
+r1 = Regexy::Web::HostName.new # matches 'foo.com', 'www.foo.com' and 'киррилический.домен.рф'
 ```
 
 ## Contributing
