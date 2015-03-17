@@ -76,7 +76,7 @@ Regexy::Regexp.new(/\Afoo\z/).and_then '\Abar\z' # => /\Afoobar\z/
 ```
 ### Bound and unbound regular expressions
 All build-in regular expressions provided in a form of `\A...\z`, which means that they match entire string only. You can remove or add string boundaries using `bound` and `unbound` methods.
-Optional arguments `method` available (`:both` by default) - `:left` for manipulating only leading `\A` and `:right` for trailing `\z`.
+Optional argument `method` available (`:both` by default) - `:left` for manipulating only leading `\A` and `:right` for trailing `\z`.
 ```ruby
 Regexy::Regexp.new('/Afoo/z').unbound(:left) # => /foo\z/
 Regexy::Regexp.new(/foo/i).bound # => /\Afoo\z/i
