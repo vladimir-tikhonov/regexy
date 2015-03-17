@@ -20,6 +20,8 @@ Regexy is the ruby gem that contains a lot of common-use regular expressions (su
     * [IP addresses](#regexywebipv4)
     * [Url](#regexyweburl)
     * [Hostname](#regexywebhostname)
+    * [Smiles](#regexytextsmile)
+    * [Emojis](#regexytextemoji)
 - [Contributing](#contributing)
 
 ## Installation
@@ -136,6 +138,25 @@ Generates regular expressions for matching hostname (with unicode support).
 
 ```ruby
 r1 = Regexy::Web::HostName.new # matches 'foo.com', 'www.foo.com' and 'киррилический.домен.рф'
+```
+### Regexy::Text::Smile
+
+Generates regular expressions for matching smiles.
+```ruby
+r = Regexy::Text::Smile.new # matches ':)', ':=)', 'xD' and so on
+# Find all smiles in text
+str = "Check out http://foo.com :). It's awesome :D"
+str.scan(r.unbound.internal_regexp).map(&:first) # => [":)", ":D"] 
+```
+
+### Regexy::Text::Emoji
+
+Generates regular expressions for matching emojis.
+```ruby
+r = Regexy::Text::Emoji.new # matches '😀','😄' and so on
+# Replace all emojis with 'x_x' 
+str = "Check out http://foo.com 😀. It's awesome 😼"
+str.gsub(r.internal_regexp, 'x_x') # => "Check out http://foo.com x_x. It's awesome x_x"
 ```
 
 ## Contributing
