@@ -14,24 +14,24 @@ describe Regexy::Web::Hashtag do
 
   context 'matches hashtags' do
     it 'with only valid characters' do
-      hashtag = VALID_CHARS.sample(8).shuffle.join
+      hashtag = VALID_CHARS.join
       expect("##{hashtag}" =~ r).to be_truthy
     end
   end
 
   context 'does not matches hashtags' do
     it 'with only numbers' do
-      hashtag = NUMBERS.sample(8).shuffle.join
+      hashtag = NUMBERS.join
       expect("##{hashtag}" =~ r).to be_nil
     end
 
     it 'with special characters' do
-      hashtag = (VALID_CHARS.sample(8) + INVALID_CHARS.sample(1)).shuffle.join
+      hashtag = (VALID_CHARS + INVALID_CHARS).join
       expect("##{hashtag}" =~ r).to be_nil
     end
 
     it 'with spaces' do
-      hashtag = (VALID_CHARS.sample(8) + [' ']).shuffle.join
+      hashtag = (VALID_CHARS + [' ']).join
       expect("##{hashtag}" =~ r).to be_nil
     end
   end
