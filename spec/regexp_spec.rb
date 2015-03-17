@@ -103,6 +103,14 @@ describe Regexy::Regexp do
   end
 
   context '#bound' do
+    class BoundCallbackCheck < Regexy::Regexp
+      protected
+
+      def additional_bound(method, regex)
+        "#{method.to_s}/#{regex}"
+      end
+    end
+
     it 'prepends \A to regexp when method is :left' do
       expect(Regexy::Regexp.new(/foo/).bound(:left)).to eq /\Afoo/
     end
@@ -118,9 +126,21 @@ describe Regexy::Regexp do
     it 'preserves regexp options' do
       expect(Regexy::Regexp.new(/foo/i).bound).to eq /\Afoo\z/i
     end
+
+    it 'calls #additional_bound callback' do
+      expect(BoundCallbackCheck.new(/foo/).bound).to eq /both\/\Afoo\z/
+    end
   end
 
   context '#unbound' do
+    class UnboundCallbackCheck < Regexy::Regexp
+      protected
+
+      def additional_unbound(method, regex)
+        "#{method.to_s}/#{regex}"
+      end
+    end
+
     it 'removes leading \A when method is :left' do
       expect(Regexy::Regexp.new(/\Afoo/).unbound(:left)).to eq /foo/
     end
@@ -135,6 +155,10 @@ describe Regexy::Regexp do
 
     it 'preserves regexp options' do
       expect(Regexy::Regexp.new(/\Afoo\z/i).unbound).to eq /foo/i
+    end
+
+    it 'calls #additional_unbound callback' do
+      expect(UnboundCallbackCheck.new(/\Afoo\z/).unbound).to eq /both\/foo/
     end
   end
 end

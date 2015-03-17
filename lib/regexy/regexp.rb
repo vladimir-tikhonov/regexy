@@ -41,6 +41,7 @@ module Regexy
       if method == :right || method == :both
         new_regexp.concat('\z')
       end
+      new_regexp = additional_bound(method, new_regexp)
       ::Regexy::Regexp.new(new_regexp, options)
     end
 
@@ -53,6 +54,7 @@ module Regexy
       if method == :right || method == :both
         new_regexp.sub!(/\\z\s*\z/, '')
       end
+      new_regexp = additional_unbound(method, new_regexp)
       ::Regexy::Regexp.new(new_regexp, options)
     end
 
@@ -64,6 +66,14 @@ module Regexy
       when ::Regexp then args.any? ? regexp.source : regexp # allows to pass custom options to regexp
       else regexp
       end
+    end
+
+    def additional_bound(method, regex) # You can override this methods if your regular expression needs additional bound/unbound logic
+      regex
+    end
+
+    def additional_unbound(method, regex)
+      regex
     end
   end
 
