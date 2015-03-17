@@ -137,7 +137,7 @@ r1 = Regexy::Web::Url.new # matches 'http://foo.com', 'www.foo.com' and 'foo.com
 Generates regular expressions for matching hostname (with unicode support).
 
 ```ruby
-r1 = Regexy::Web::HostName.new # matches 'foo.com', 'www.foo.com' and 'киррилический.домен.рф'
+r1 = Regexy::Web::HostName.new # matches 'foo.com', 'www.foo.com' and 'киррилический.домен.рф' but not `127.0.0.1`
 ```
 ### Regexy::Text::Smile
 
