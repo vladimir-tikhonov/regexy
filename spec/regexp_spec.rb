@@ -107,7 +107,7 @@ describe Regexy::Regexp do
       protected
 
       def additional_bound(method, regex)
-        "#{method.to_s}/#{regex}"
+        "#{method.to_s}&#{regex}"
       end
     end
 
@@ -128,7 +128,7 @@ describe Regexy::Regexp do
     end
 
     it 'calls #additional_bound callback' do
-      expect(BoundCallbackCheck.new(/foo/).bound).to eq /both\/\Afoo\z/
+      expect(BoundCallbackCheck.new(/foo/).bound).to eq /both&\Afoo\z/
     end
   end
 
@@ -137,7 +137,7 @@ describe Regexy::Regexp do
       protected
 
       def additional_unbound(method, regex)
-        "#{method.to_s}/#{regex}"
+        "#{method.to_s}&#{regex}"
       end
     end
 
@@ -158,7 +158,7 @@ describe Regexy::Regexp do
     end
 
     it 'calls #additional_unbound callback' do
-      expect(UnboundCallbackCheck.new(/\Afoo\z/).unbound).to eq /both\/foo/
+      expect(UnboundCallbackCheck.new(/\Afoo\z/).unbound).to eq /both&foo/
     end
   end
 end
