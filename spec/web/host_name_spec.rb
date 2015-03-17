@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 describe Regexy::Web::HostName do
   VALID_HOSTNAMES = [
     'foo.bar',
