@@ -107,7 +107,7 @@ describe Regexy::Regexp do
       protected
 
       def additional_bound(method, regex)
-        "#{method.to_s}&#{regex}"
+        "#{method}&#{regex}"
       end
     end
 
@@ -137,7 +137,7 @@ describe Regexy::Regexp do
       protected
 
       def additional_unbound(method, regex)
-        "#{method.to_s}&#{regex}"
+        "#{method}&#{regex}"
       end
     end
 

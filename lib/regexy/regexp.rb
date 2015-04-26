@@ -72,7 +72,7 @@ module Regexy
   class RegexpWithMode < ::Regexy::Regexp
     def initialize(mode = default_mode, *args)
       regexp = regexp_for(mode.to_sym)
-      fail ArgumentError, "Unknown mode #{mode.to_s}" unless regexp
+      fail ArgumentError, "Unknown mode #{mode}" unless regexp
       super(regexp, *args)
     end
 
