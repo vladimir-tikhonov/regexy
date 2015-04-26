@@ -174,7 +174,6 @@ describe Regexy::RegexpWithMode do
       case mode
       when :mode_1 then /mode_1/
       when :mode_2 then /mode_2/
-      else nil
       end
     end
 
