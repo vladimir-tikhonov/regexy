@@ -31,7 +31,7 @@ describe Regexy::Regexp do
   end
 
   it 'mimics original regexp behaviour' do
-    #Fix for rubinius
+    # Fix for rubinius
     expected_methods = ::Regexp.public_instance_methods(false) - [:initialize, :initialize_copy]
     expect(Regexy::Regexp.public_instance_methods(false)).to include(*expected_methods)
   end
