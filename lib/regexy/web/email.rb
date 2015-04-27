@@ -14,7 +14,6 @@ module Regexy
         when :relaxed then EMAIL_RELAXED
         when :normal  then EMAIL_NORMAL
         when :strict  then EMAIL_STRICT
-        else nil
         end
       end
     end

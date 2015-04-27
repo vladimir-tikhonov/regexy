@@ -12,7 +12,6 @@ module Regexy
         case mode
         when :normal    then IPV4_NORMAL
         when :with_port then IPV4_WITH_PORT
-        else nil
         end
       end
     end
@@ -33,9 +32,8 @@ module Regexy
 
       def regexp_for(mode)
         case mode
-          when :normal    then IPV6_NORMAL
-          when :with_port then IPV6_WITH_PORT
-          else nil
+        when :normal    then IPV6_NORMAL
+        when :with_port then IPV6_WITH_PORT
         end
       end
     end

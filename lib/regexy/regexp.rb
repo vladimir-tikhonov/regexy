@@ -35,12 +35,8 @@ module Regexy
     def bound(method = :both)
       new_regexp = source
       method = method.to_sym
-      if method == :left || method == :both
-        new_regexp.prepend('\A')
-      end
-      if method == :right || method == :both
-        new_regexp.concat('\z')
-      end
+      new_regexp.prepend('\A') if method == :left || method == :both
+      new_regexp.concat('\z') if method == :right || method == :both
       new_regexp = additional_bound(method, new_regexp)
       ::Regexy::Regexp.new(new_regexp, options)
     end
@@ -48,12 +44,8 @@ module Regexy
     def unbound(method = :both)
       new_regexp = source
       method = method.to_sym
-      if method == :left || method == :both
-        new_regexp.sub!(/\A\\A/, '')
-      end
-      if method == :right || method == :both
-        new_regexp.sub!(/\\z\s*\z/, '')
-      end
+      new_regexp.sub!(/\A\\A/, '') if method == :left || method == :both
+      new_regexp.sub!(/\\z\s*\z/, '') if method == :right || method == :both
       new_regexp = additional_unbound(method, new_regexp)
       ::Regexy::Regexp.new(new_regexp, options)
     end
@@ -80,7 +72,7 @@ module Regexy
   class RegexpWithMode < ::Regexy::Regexp
     def initialize(mode = default_mode, *args)
       regexp = regexp_for(mode.to_sym)
-      fail ArgumentError, "Unknown mode #{mode.to_s}" unless regexp
+      fail ArgumentError, "Unknown mode #{mode}" unless regexp
       super(regexp, *args)
     end
 

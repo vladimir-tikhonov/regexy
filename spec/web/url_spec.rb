@@ -47,7 +47,7 @@ describe Regexy::Web::Url do
     'http:///a',
     'http:// shouldfail.com',
     ':// should fail',
-    'http://foo.bar/foo(bar)baz quux',
+    'http://foo.bar/foo(bar)baz quux'
   ]
 
   let(:r) { Regexy::Web::Url.new }

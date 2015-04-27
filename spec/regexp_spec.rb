@@ -31,7 +31,7 @@ describe Regexy::Regexp do
   end
 
   it 'mimics original regexp behaviour' do
-    #Fix for rubinius
+    # Fix for rubinius
     expected_methods = ::Regexp.public_instance_methods(false) - [:initialize, :initialize_copy]
     expect(Regexy::Regexp.public_instance_methods(false)).to include(*expected_methods)
   end
@@ -107,7 +107,7 @@ describe Regexy::Regexp do
       protected
 
       def additional_bound(method, regex)
-        "#{method.to_s}&#{regex}"
+        "#{method}&#{regex}"
       end
     end
 
@@ -137,7 +137,7 @@ describe Regexy::Regexp do
       protected
 
       def additional_unbound(method, regex)
-        "#{method.to_s}&#{regex}"
+        "#{method}&#{regex}"
       end
     end
 
@@ -174,7 +174,6 @@ describe Regexy::RegexpWithMode do
       case mode
       when :mode_1 then /mode_1/
       when :mode_2 then /mode_2/
-      else nil
       end
     end
 
